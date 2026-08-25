@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>S'aimer 運用前後 比較</title>
+<style>
+  :root{
+    --bg:#fcfcfb; --card:#ffffff; --ink:#1c1a17; --ink2:#5a544c; --muted:#8b857b;
+    --line:#e7e2da; --grid:#efeae2;
+    --before:#2C7FB8;   /* 運用前 */
+    --after:#D95F0E;    /* 運用後 */
+    --warn:#b4232a;
+    --gold:#b08d4a;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:"Hiragino Kaku Gothic ProN","Noto Sans JP",system-ui,sans-serif;line-height:1.6;}
+  .wrap{max-width:980px;margin:0 auto;padding:28px 20px 60px;}
+  h1{font-size:22px;margin:0 0 4px;letter-spacing:.02em}
+  .sub{color:var(--ink2);font-size:13px;margin:0 0 20px}
+  .legend{display:flex;gap:18px;align-items:center;font-size:12.5px;color:var(--ink2);margin:6px 0 22px;flex-wrap:wrap}
+  .lg{display:inline-flex;align-items:center;gap:6px}
+  .sw{width:14px;height:3px;border-radius:2px;display:inline-block}
+  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:0 0 26px}
+  .kpi{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 14px}
+  .kpi .l{font-size:11.5px;color:var(--muted)}
+  .kpi .v{font-size:21px;font-weight:700;margin-top:3px;letter-spacing:.01em}
+  .kpi .d{font-size:11.5px;margin-top:3px}
+  .up{color:var(--before)} .down{color:var(--after)}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 16px 8px;margin:0 0 22px}
+  .card h2{font-size:15px;margin:0 0 2px}
+  .card .cap{font-size:12px;color:var(--muted);margin:0 0 6px}
+  svg{width:100%;height:auto;display:block;overflow:visible}
+  .tick{fill:var(--muted);font-size:10px}
+  .axis{stroke:var(--grid);stroke-width:1}
+  .dot{stroke:#fff;stroke-width:1.5}
+  .vmark{stroke:var(--gold);stroke-width:1.5;stroke-dasharray:4 3}
+  .vlab{fill:var(--gold);font-size:10.5px;font-weight:700}
+  table{border-collapse:collapse;width:100%;font-size:12.5px;margin-top:6px}
+  th,td{padding:6px 8px;text-align:right;border-bottom:1px solid var(--line);white-space:nowrap}
+  th:first-child,td:first-child{text-align:left}
+  thead th{color:var(--ink2);font-weight:600;border-bottom:2px solid var(--line)}
+  .beforecell{color:var(--before)} .aftercell{color:var(--after)}
+  .note{font-size:12px;color:var(--ink2);background:#faf7f1;border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin-top:8px}
+  .note b{color:var(--ink)}
+  .tbl-scroll{overflow-x:auto}
+  @media(max-width:640px){.kpis{grid-template-columns:repeat(2,1fr)}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>S'aimer 運用前 × 運用後 比較（月別・図解）</h1>
+  <p class="sub">斗（広告・LP運用）関与開始＝<b>2026年2月</b>／運用前 2025年1月〜2026年1月・運用後 2026年2月〜7月<br>
+  出典：運用前=年間経営データ（hacomono純売上・プラン契約）／運用後=決済レポート＋hacomono明細。※基準差あり（末尾）。</p>
+
+  <div class="legend">
+    <span class="lg"><span class="sw" style="background:var(--before)"></span>運用前（〜2026/1）</span>
+    <span class="lg"><span class="sw" style="background:var(--after)"></span>運用後（2026/2〜）</span>
+    <span class="lg"><span class="sw" style="background:var(--gold);height:0;border-top:2px dashed var(--gold)"></span>運用開始（2月）</span>
+  </div>
+
+  <div class="kpis">
+    <div class="kpi"><div class="l">月平均売上（運用前）</div><div class="v up">¥565,300</div><div class="d">13ヶ月平均</div></div>
+    <div class="kpi"><div class="l">月平均売上（運用後）</div><div class="v down">¥456,780</div><div class="d">6ヶ月平均</div></div>
+    <div class="kpi"><div class="l">有料会員（直近1月→7月）</div><div class="v">21 → 18</div><div class="d down">−3名</div></div>
+    <div class="kpi"><div class="l">休会（直近1月→7月）</div><div class="v">6 → 10</div><div class="d down">+4名（ほぼ倍）</div></div>
+  </div>
+
+  <div class="card">
+    <h2>① 月別 売上</h2>
+    <p class="cap">2025/12は返金¥311,250による異常値（純売上¥218,000）。運用後2月は¥530,888とむしろ上昇、下降が明確化するのは5月以降。</p>
+    <svg id="c_sales" viewBox="0 0 920 260" role="img" aria-label="月別売上の推移"></svg>
+  </div>
+
+  <div class="card">
+    <h2>② 月別 有料会員数（休会・チケット除く）</h2>
+    <p class="cap">運用前は成長（16→ピーク24）。運用後は21→18へ微減。※2026/2は明細バッチの都合で欠測のため点なし（1月→3月で接続）。</p>
+    <svg id="c_paid" viewBox="0 0 920 240" role="img" aria-label="月別有料会員数の推移"></svg>
+  </div>
+
+  <div class="card">
+    <h2>③ 月別 休会数（＝流出のサイン）</h2>
+    <p class="cap">運用前は1〜6名。運用後は9〜10名へ倍増。<b>売上減の主因はここ（既存の継続＝出口）</b>。新規入会は運用後も毎月1〜3名続いている。</p>
+    <svg id="c_kyukai" viewBox="0 0 920 220" role="img" aria-label="月別休会数の推移"></svg>
+  </div>
+
+  <div class="card">
+    <h2>④ 月別データ表</h2>
+    <div class="tbl-scroll">
+    <table>
+      <thead><tr><th>月</th><th>売上</th><th>有料会員</th><th>休会</th><th>新規入会</th></tr></thead>
+      <tbody id="tbody"></tbody>
+    </table>
+    </div>
+  </div>
+
+  <div class="note">
+    <b>数字を扱う上での注意（要開示）</b><br>
+    1. 売上：運用前=年間経営データ（hacomono中心の純売上・返金差引）／運用後=決済レポート（hacomono＋Pay.jp＋Square）。近いが完全同一基準ではない（直近は1月¥493k→2月¥531kと連続）。<br>
+    2. 会員数：運用前=プラン契約のstart/end日ベース（セミP0003含む）／運用後=計上月の課金明細ベース（セミ無し）。基準差で±数名。2026/2は欠測。<br>
+    3. 経費（家賃・人件費・広告費・リジョブ）は未取得＝損益（黒字/赤字）はこの資料では判定不可。<br>
+    4. 3月決済シートに手数料の式ミス疑い（原本要確認）。売上額には影響なし。<br>
+    <b>結論：課題は「集客」ではなく「定着」。売上を戻す最短手は休会10名の掘り起こし（3〜4名復帰で+¥75,000〜100,000/月）。</b>
+  </div>
+</div>
+
+<script>
+const DATA = [
+  {m:"25/1",  s:671750, p:16, k:1,  n:""},
+  {m:"25/2",  s:661500, p:17, k:1,  n:""},
+  {m:"25/3",  s:616900, p:20, k:0,  n:""},
+  {m:"25/4",  s:452250, p:17, k:2,  n:""},
+  {m:"25/5",  s:585500, p:19, k:1,  n:""},
+  {m:"25/6",  s:548000, p:21, k:1,  n:""},
+  {m:"25/7",  s:657000, p:20, k:2,  n:""},
+  {m:"25/8",  s:466000, p:21, k:3,  n:""},
+  {m:"25/9",  s:734000, p:22, k:2,  n:""},
+  {m:"25/10", s:632000, p:24, k:1,  n:""},
+  {m:"25/11", s:613000, p:24, k:3,  n:""},
+  {m:"25/12", s:218000, p:21, k:5,  n:""},
+  {m:"26/1",  s:493000, p:21, k:6,  n:""},
+  {m:"26/2",  s:530888, p:null,k:null,n:"", after:true},
+  {m:"26/3",  s:493646, p:20, k:9,  n:"1", after:true},
+  {m:"26/4",  s:492735, p:21, k:10, n:"3", after:true},
+  {m:"26/5",  s:383348, p:23, k:9,  n:"3", after:true},
+  {m:"26/6",  s:466250, p:19, k:10, n:"1", after:true},
+  {m:"26/7",  s:373810, p:18, k:10, n:"2", after:true},
+];
+const AFTER_START = 13; // index of 26/2
+const BEFORE="#2C7FB8", AFTER="#D95F0E";
+const yen = v => "¥"+v.toLocaleString();
+
+function draw(id, key, {h, fmt, unit}){
+  const svg=document.getElementById(id);
+  const W=920, PADL=54, PADR=16, PADT=16, PADB=26;
+  const pts=DATA.map((d,i)=>({i,x:0,y:0,v:d[key],m:d.m,after:!!d.after})).filter(p=>p.v!==null&&p.v!==undefined);
+  const vals=pts.map(p=>p.v);
+  const maxV=Math.max(...vals), minV=Math.min(0,...vals);
+  const n=DATA.length;
+  const xAt=i=> PADL + (W-PADL-PADR)*(i/(n-1));
+  const yAt=v=> PADT + (h-PADT-PADB)*(1-(v-minV)/(maxV-minV||1));
+  pts.forEach(p=>{p.x=xAt(p.i);p.y=yAt(p.v);});
+  let g=`<line class="axis" x1="${PADL}" y1="${h-PADB}" x2="${W-PADR}" y2="${h-PADB}"/>`;
+  // y gridlines (4)
+  for(let t=0;t<=4;t++){const v=minV+(maxV-minV)*t/4;const y=yAt(v);
+    g+=`<line class="axis" x1="${PADL}" y1="${y.toFixed(1)}" x2="${W-PADR}" y2="${y.toFixed(1)}"/>`;
+    g+=`<text class="tick" x="${PADL-8}" y="${(y+3).toFixed(1)}" text-anchor="end">${fmt(v)}</text>`;}
+  // x labels (every other)
+  DATA.forEach((d,i)=>{ if(i%2===0||i>=AFTER_START){const x=xAt(i);
+    g+=`<text class="tick" x="${x.toFixed(1)}" y="${h-PADB+14}" text-anchor="middle">${d.m}</text>`;}});
+  // 運用開始 vertical marker (between 26/1 and 26/2 -> at index 13)
+  const vx=xAt(AFTER_START)-((xAt(AFTER_START)-xAt(AFTER_START-1))/2);
+  g+=`<line class="vmark" x1="${vx.toFixed(1)}" y1="${PADT}" x2="${vx.toFixed(1)}" y2="${h-PADB}"/>`;
+  g+=`<text class="vlab" x="${(vx+4).toFixed(1)}" y="${PADT+11}">運用開始</text>`;
+  // split path before/after
+  function path(seg){return seg.map((p,j)=>(j?"L":"M")+p.x.toFixed(1)+" "+p.y.toFixed(1)).join(" ");}
+  const before=pts.filter(p=>p.i<=AFTER_START-1);
+  const after=pts.filter(p=>p.i>=AFTER_START);
+  // connect boundary: include last before point as start of after seg for continuity
+  const bridge = before.length&&after.length ? [before[before.length-1], ...after] : after;
+  g+=`<path d="${path(before)}" fill="none" stroke="${BEFORE}" stroke-width="2.4"/>`;
+  g+=`<path d="${path(bridge)}" fill="none" stroke="${AFTER}" stroke-width="2.4" stroke-dasharray="${after.length&&before.length&&(after[0].i-before[before.length-1].i>1)?'':'0'}"/>`;
+  pts.forEach(p=>{const c=p.after?AFTER:BEFORE;
+    g+=`<circle class="dot" cx="${p.x.toFixed(1)}" cy="${p.y.toFixed(1)}" r="3.4" fill="${c}"><title>${p.m}: ${fmt(p.v)}${unit||''}</title></circle>`;});
+  svg.setAttribute("viewBox",`0 0 ${W} ${h}`);
+  svg.innerHTML=g;
+}
+
+draw("c_sales","s",{h:260, fmt:v=>"¥"+Math.round(v/1000)+"k", unit:""});
+draw("c_paid","p",{h:240, fmt:v=>Math.round(v)+"名", unit:"名"});
+draw("c_kyukai","k",{h:220, fmt:v=>Math.round(v)+"名", unit:"名"});
+
+// table
+document.getElementById("tbody").innerHTML = DATA.map(d=>{
+  const cls=d.after?"aftercell":"beforecell";
+  return `<tr><td class="${cls}">${d.m}</td><td>${yen(d.s)}</td><td>${d.p??"—"}</td><td>${d.k??"—"}</td><td>${d.n||"—"}</td></tr>`;
+}).join("");
+</script>
+</body>
+</html>
