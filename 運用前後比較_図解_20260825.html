@@ -80,6 +80,12 @@
   </div>
 
   <div class="card">
+    <h2>②' 月別 総会員数（有料＋休会＋チケット）</h2>
+    <p class="cap">在籍全体の推移。運用前は23→42へ増加。運用後は53→42（7月にチケット層が減少）。※チケットの集計基準が運用前(プラン契約)と運用後(課金明細)で異なるため、2月→3月の段差は一部が方式差。</p>
+    <svg id="c_total" viewBox="0 0 920 220" role="img" aria-label="月別総会員数の推移"></svg>
+  </div>
+
+  <div class="card">
     <h2>③ 月別 休会数（＝流出のサイン）</h2>
     <p class="cap">運用前は1〜6名。運用後は9〜10名へ倍増。<b>売上減の主因はここ（既存の継続＝出口）</b>。新規入会は運用後も毎月1〜3名続いている。</p>
     <svg id="c_kyukai" viewBox="0 0 920 220" role="img" aria-label="月別休会数の推移"></svg>
@@ -89,7 +95,7 @@
     <h2>④ 月別データ表</h2>
     <div class="tbl-scroll">
     <table>
-      <thead><tr><th>月</th><th>売上</th><th>有料会員</th><th>休会</th><th>新規入会</th></tr></thead>
+      <thead><tr><th>月</th><th>売上</th><th>有料会員</th><th>休会</th><th>総会員数</th><th>新規入会</th></tr></thead>
       <tbody id="tbody"></tbody>
     </table>
     </div>
@@ -107,25 +113,25 @@
 
 <script>
 const DATA = [
-  {m:"25/1",  s:671750, p:16, k:1,  n:""},
-  {m:"25/2",  s:661500, p:17, k:1,  n:""},
-  {m:"25/3",  s:616900, p:20, k:0,  n:""},
-  {m:"25/4",  s:452250, p:17, k:2,  n:""},
-  {m:"25/5",  s:585500, p:19, k:1,  n:""},
-  {m:"25/6",  s:548000, p:21, k:1,  n:""},
-  {m:"25/7",  s:657000, p:20, k:2,  n:""},
-  {m:"25/8",  s:466000, p:21, k:3,  n:""},
-  {m:"25/9",  s:734000, p:22, k:2,  n:""},
-  {m:"25/10", s:632000, p:24, k:1,  n:""},
-  {m:"25/11", s:613000, p:24, k:3,  n:""},
-  {m:"25/12", s:218000, p:21, k:5,  n:""},
-  {m:"26/1",  s:493000, p:21, k:6,  n:""},
-  {m:"26/2",  s:530888, p:null,k:null,n:"", after:true},
-  {m:"26/3",  s:493646, p:20, k:9,  n:"1", after:true},
-  {m:"26/4",  s:492735, p:21, k:10, n:"3", after:true},
-  {m:"26/5",  s:383348, p:23, k:9,  n:"3", after:true},
-  {m:"26/6",  s:466250, p:19, k:10, n:"1", after:true},
-  {m:"26/7",  s:373810, p:18, k:10, n:"2", after:true},
+  {m:"25/1",  s:671750, p:16, k:1,  t:23, n:""},
+  {m:"25/2",  s:661500, p:17, k:1,  t:24, n:""},
+  {m:"25/3",  s:616900, p:20, k:0,  t:27, n:""},
+  {m:"25/4",  s:452250, p:17, k:2,  t:28, n:""},
+  {m:"25/5",  s:585500, p:19, k:1,  t:31, n:""},
+  {m:"25/6",  s:548000, p:21, k:1,  t:34, n:""},
+  {m:"25/7",  s:657000, p:20, k:2,  t:35, n:""},
+  {m:"25/8",  s:466000, p:21, k:3,  t:37, n:""},
+  {m:"25/9",  s:734000, p:22, k:2,  t:38, n:""},
+  {m:"25/10", s:632000, p:24, k:1,  t:39, n:""},
+  {m:"25/11", s:613000, p:24, k:3,  t:41, n:""},
+  {m:"25/12", s:218000, p:21, k:5,  t:41, n:""},
+  {m:"26/1",  s:493000, p:21, k:6,  t:42, n:""},
+  {m:"26/2",  s:530888, p:null,k:null,t:null,n:"", after:true},
+  {m:"26/3",  s:493646, p:20, k:9,  t:53, n:"1", after:true},
+  {m:"26/4",  s:492735, p:21, k:10, t:55, n:"3", after:true},
+  {m:"26/5",  s:383348, p:23, k:9,  t:56, n:"3", after:true},
+  {m:"26/6",  s:466250, p:19, k:10, t:53, n:"1", after:true},
+  {m:"26/7",  s:373810, p:18, k:10, t:42, n:"2", after:true},
 ];
 const AFTER_START = 13; // index of 26/2
 const BEFORE="#2C7FB8", AFTER="#D95F0E";
@@ -169,12 +175,13 @@ function draw(id, key, {h, fmt, unit}){
 
 draw("c_sales","s",{h:260, fmt:v=>"¥"+Math.round(v/1000)+"k", unit:""});
 draw("c_paid","p",{h:240, fmt:v=>Math.round(v)+"名", unit:"名"});
+draw("c_total","t",{h:220, fmt:v=>Math.round(v)+"名", unit:"名"});
 draw("c_kyukai","k",{h:220, fmt:v=>Math.round(v)+"名", unit:"名"});
 
 // table
 document.getElementById("tbody").innerHTML = DATA.map(d=>{
   const cls=d.after?"aftercell":"beforecell";
-  return `<tr><td class="${cls}">${d.m}</td><td>${yen(d.s)}</td><td>${d.p??"—"}</td><td>${d.k??"—"}</td><td>${d.n||"—"}</td></tr>`;
+  return `<tr><td class="${cls}">${d.m}</td><td>${yen(d.s)}</td><td>${d.p??"—"}</td><td>${d.k??"—"}</td><td>${d.t??"—"}</td><td>${d.n||"—"}</td></tr>`;
 }).join("");
 </script>
 </body>
