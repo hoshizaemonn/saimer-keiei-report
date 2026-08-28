@@ -45,6 +45,14 @@
   .note{font-size:12px;color:var(--ink2);background:#faf7f1;border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin-top:8px}
   .note b{color:var(--ink)}
   .tbl-scroll{overflow-x:auto}
+  .funnel{margin:10px 0 16px}
+  .fstage{margin:2px 0}
+  .fbar{background:var(--after);height:34px;border-radius:7px;display:flex;align-items:center;justify-content:flex-end;padding:0 12px;color:#fff;transition:width .3s}
+  .fbar.fb2{background:#e2892f}.fbar.fb3{background:#c9a24a}
+  .fnum{font-size:15px;font-weight:700;letter-spacing:.02em}
+  .flab{font-size:11.5px;color:var(--ink2);margin:2px 0 0 2px}
+  .frate{font-size:11.5px;color:var(--muted);margin:3px 0 3px 10px}
+  .frate-strong{color:var(--warn);font-weight:700;margin-top:6px}
   @media(max-width:640px){.kpis{grid-template-columns:repeat(2,1fr)}}
 </style>
 </head>
@@ -92,6 +100,28 @@
   </div>
 
   <div class="card">
+    <h2>⑤ 流入 → hacomono ファネル（運用後 3〜7月）</h2>
+    <p class="cap">GA4実測。LP（/lp2/）への<b>流入は運用で約3.7倍に伸長</b>（3月192→6月715UU）、hacomonoへのクリックも比例して増加。<b>だが新規入会は毎月1〜3名で頭打ち</b>＝ボトルネックは集客ではなく「クリック→体験予約→入会」の転換と定着。</p>
+
+    <div class="funnel">
+      <div class="fstage"><div class="fbar" style="width:100%"><span class="fnum">2,786</span></div><div class="flab">LP流入（UU・3〜7月計）</div></div>
+      <div class="frate">▼ クリック率 14.9%</div>
+      <div class="fstage"><div class="fbar fb2" style="width:14.9%;min-width:120px"><span class="fnum">414</span></div><div class="flab">hacomonoクリック（cta）</div></div>
+      <div class="frate">▼ クリック→入会 2.4%</div>
+      <div class="fstage"><div class="fbar fb3" style="width:4%;min-width:70px"><span class="fnum">10</span></div><div class="flab">新規入会</div></div>
+      <div class="frate frate-strong">流入→入会 0.36%（業界目安 0.5〜2%）</div>
+    </div>
+
+    <div class="tbl-scroll">
+    <table>
+      <thead><tr><th>月</th><th>LP流入(UU)</th><th>hacomonoクリック</th><th>クリック率</th><th>希望日リクエスト</th><th>新規入会</th><th>流入→入会</th></tr></thead>
+      <tbody id="ftbody"></tbody>
+    </table>
+    </div>
+    <p class="cap" style="margin-top:8px">※2026/2はLP2（/lp2/）稼働前のためGA4流入は0（全サイト流入は507セッション）。希望日リクエスト計測は5月開始のため3〜4月は「—」。cta＝LP内「予約する」等hacomono遷移クリック（件数ベース／人数ではない）。</p>
+  </div>
+
+  <div class="card">
     <h2>④ 月別データ表</h2>
     <div class="tbl-scroll">
     <table>
@@ -107,7 +137,8 @@
     2. 会員数：運用前=プラン契約のstart/end日ベース（セミP0003含む）／運用後=計上月の課金明細ベース（セミ無し）。基準差で±数名。2026/2は欠測。<br>
     3. 経費（家賃・人件費・広告費・リジョブ）は未取得＝損益（黒字/赤字）はこの資料では判定不可。<br>
     4. 3月決済シートに手数料の式ミス疑い（原本要確認）。売上額には影響なし。<br>
-    <b>結論：課題は「集客」ではなく「定着」。売上を戻す最短手は休会10名の掘り起こし（3〜4名復帰で+¥75,000〜100,000/月）。</b>
+    5. 流入はGA4実測（LP /lp2/）。cta_click＝hacomono遷移クリック（件数）。希望日リクエスト計測は5月開始。<br>
+    <b>結論：課題は「集客」ではなく「転換・定着」。流入は運用で約3.7倍に伸長し入口は機能している（GA4実測）。売上を戻す最短手は①休会10名の掘り起こし（3〜4名復帰で+¥75,000〜100,000/月）、②hacomonoクリック414件→入会10件の転換改善（体験予約導線）。</b>
   </div>
 </div>
 
@@ -177,6 +208,21 @@ draw("c_sales","s",{h:260, fmt:v=>"¥"+Math.round(v/1000)+"k", unit:""});
 draw("c_paid","p",{h:240, fmt:v=>Math.round(v)+"名", unit:"名"});
 draw("c_total","t",{h:220, fmt:v=>Math.round(v)+"名", unit:"名"});
 draw("c_kyukai","k",{h:220, fmt:v=>Math.round(v)+"名", unit:"名"});
+
+// funnel table (運用後 3〜7月・GA4実測)
+const FUNNEL=[
+  {m:"3月", lp:192, cta:29, hope:null, n:1},
+  {m:"4月", lp:561, cta:69, hope:null, n:3},
+  {m:"5月", lp:614, cta:93, hope:5, n:3},
+  {m:"6月", lp:715, cta:119, hope:8, n:1},
+  {m:"7月", lp:704, cta:104, hope:10, n:2},
+];
+const pct=(a,b)=> b? (a/b*100).toFixed(1)+"%" : "—";
+let frows = FUNNEL.map(d=>`<tr><td>${d.m}</td><td>${d.lp}</td><td>${d.cta}</td><td>${pct(d.cta,d.lp)}</td><td>${d.hope??"—"}</td><td>${d.n}</td><td>${pct(d.n,d.lp)}</td></tr>`).join("");
+const T={lp:0,cta:0,hope:0,n:0};
+FUNNEL.forEach(d=>{T.lp+=d.lp;T.cta+=d.cta;T.hope+=(d.hope||0);T.n+=d.n;});
+frows += `<tr style="font-weight:700;border-top:2px solid var(--line)"><td>計</td><td>${T.lp.toLocaleString()}</td><td>${T.cta}</td><td>${pct(T.cta,T.lp)}</td><td>${T.hope}</td><td>${T.n}</td><td>${pct(T.n,T.lp)}</td></tr>`;
+document.getElementById("ftbody").innerHTML = frows;
 
 // table
 document.getElementById("tbody").innerHTML = DATA.map(d=>{
