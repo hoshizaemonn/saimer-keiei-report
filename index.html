@@ -138,7 +138,7 @@
       <tbody id="ftbody"></tbody>
     </table>
     </div>
-    <p class="cap" style="margin-top:8px">※2026/2はLP2（/lp2/）稼働前のためGA4流入は0（全サイト流入は507セッション）。cta＝LP内「予約する」等hacomono遷移クリック（件数ベース／人数ではない）。<b>希望日リクエスト＝LPの希望日フォーム送信数（＝申込ベース。クリック数ではない）</b>で計測は5月開始のため3〜4月は「—」。</p>
+    <p class="cap" style="margin-top:8px">※2026/2はLP2（/lp2/）稼働前のためGA4流入は0（全サイト流入は507セッション）。cta＝LP内「予約する」等hacomono遷移クリック（件数ベース／人数ではない）。<b>希望日リクエスト＝店の受信メール実数（/reserve-request/）に修正済み</b>。※GA4の`hope_request_submit`は一般問い合わせ混在＋確認ページの二重発火で約10倍に過大計上だったため、一次情報（受信メール）に差し替え。</p>
   </div>
 
   <div class="card">
@@ -149,6 +149,22 @@
       <tbody id="tbody"></tbody>
     </table>
     </div>
+  </div>
+
+  <div class="card" style="border-color:#cfe0e8">
+    <h2>⑥ 予約転換と“掘り起こしプール”（新規回復の最短ルート）</h2>
+    <p class="cap">体験→入会は<b>80%（体験5件中4件入会）</b>と極めて高い。問題は接客ではなく<b>「体験に到達する人が月1〜2人しかいない」入口転換</b>。GA4／hacomono／受信メールの精査で、“あと一歩で放置されている温かいリード”が判明した。</p>
+    <div class="tbl-scroll">
+    <table>
+      <thead><tr><th>掘り起こしプール</th><th>人数</th><th>状態</th><th>打ち手</th></tr></thead>
+      <tbody>
+        <tr><td><b>hacomono登録済み・体験予約ゼロ</b></td><td>23名</td><td>登録したが予約せず放置（2026年1〜7月登録）</td><td>メールで体験案内（連絡はメール中心）</td></tr>
+        <tr><td><b>希望日リクエスト未対応</b></td><td>3名</td><td>申込メールが来たがhacomonoに登録・予約の痕跡なし＝取りこぼし疑い</td><td>即フォロー（電話/メール）</td></tr>
+        <tr><td><b>休会</b></td><td>8名</td><td>継続が途切れて休会中</td><td>ヒアリング＋軽いプラン（チケット）で復帰提案</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p class="note" style="margin-top:8px"><b>結論：新規は「広告で増やす」より、この3プールの掘り起こしが最速で安い。</b>体験→入会80%なので、登録済み23名が<b>5人動けば体験→約4人入会</b>。今の月1〜2入会に対して桁が変わる。※人数のみ・個人情報は非掲載（該当者リストは社内資料で管理）。</p>
   </div>
 
   <div class="note">
@@ -235,9 +251,9 @@ draw("c_kyukai","k",{h:220, fmt:v=>Math.round(v)+"名", unit:"名"});
 const FUNNEL=[
   {m:"3月", lp:192, cta:29, hope:null, n:1},
   {m:"4月", lp:561, cta:69, hope:null, n:3},
-  {m:"5月", lp:614, cta:93, hope:5, n:3},
-  {m:"6月", lp:715, cta:119, hope:8, n:1},
-  {m:"7月", lp:704, cta:104, hope:10, n:2},
+  {m:"5月", lp:614, cta:93, hope:1, n:3},
+  {m:"6月", lp:715, cta:119, hope:1, n:1},
+  {m:"7月", lp:704, cta:104, hope:0, n:2},
 ];
 const pct=(a,b)=> b? (a/b*100).toFixed(1)+"%" : "—";
 let frows = FUNNEL.map(d=>`<tr><td>${d.m}</td><td>${d.lp}</td><td>${d.cta}</td><td>${pct(d.cta,d.lp)}</td><td>${d.hope??"—"}</td><td>${d.n}</td><td>${pct(d.n,d.lp)}</td></tr>`).join("");
