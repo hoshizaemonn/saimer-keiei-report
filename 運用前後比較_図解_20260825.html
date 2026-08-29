@@ -53,6 +53,12 @@
   .flab{font-size:11.5px;color:var(--ink2);margin:2px 0 0 2px}
   .frate{font-size:11.5px;color:var(--muted);margin:3px 0 3px 10px}
   .frate-strong{color:var(--warn);font-weight:700;margin-top:6px}
+  .fdaily{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:14px 0 4px}
+  .fd{background:#faf7f1;border:1px solid var(--line);border-radius:10px;padding:10px 12px}
+  .fdl{font-size:11px;color:var(--muted)}
+  .fdv{font-size:17px;font-weight:700;margin-top:3px}
+  .fdv span{font-size:11px;font-weight:400;color:var(--ink2);margin-left:2px}
+  @media(max-width:640px){.fdaily{grid-template-columns:repeat(2,1fr)}}
   @media(max-width:640px){.kpis{grid-template-columns:repeat(2,1fr)}}
 </style>
 </head>
@@ -112,13 +118,21 @@
       <div class="frate frate-strong">流入→入会 0.36%（業界目安 0.5〜2%）</div>
     </div>
 
+    <div class="fdaily">
+      <div class="fd"><div class="fdl">LP流入</div><div class="fdv">約18.2<span>人/日</span></div></div>
+      <div class="fd"><div class="fdl">hacomonoクリック</div><div class="fdv">約2.7<span>件/日</span></div></div>
+      <div class="fd"><div class="fdl">希望日リクエスト</div><div class="fdv">約4日に1件<span>（0.25/日）</span></div></div>
+      <div class="fd"><div class="fdl">新規入会</div><div class="fdv">約15日に1名<span>（月2.0名）</span></div></div>
+    </div>
+    <p class="cap" style="margin:2px 0 0">1日平均は運用後3〜7月（153日）。希望日リクエストは計測開始の5〜7月（92日）で算出。</p>
+
     <div class="tbl-scroll">
     <table>
       <thead><tr><th>月</th><th>LP流入(UU)</th><th>hacomonoクリック</th><th>クリック率</th><th>希望日リクエスト</th><th>新規入会</th><th>流入→入会</th></tr></thead>
       <tbody id="ftbody"></tbody>
     </table>
     </div>
-    <p class="cap" style="margin-top:8px">※2026/2はLP2（/lp2/）稼働前のためGA4流入は0（全サイト流入は507セッション）。希望日リクエスト計測は5月開始のため3〜4月は「—」。cta＝LP内「予約する」等hacomono遷移クリック（件数ベース／人数ではない）。</p>
+    <p class="cap" style="margin-top:8px">※2026/2はLP2（/lp2/）稼働前のためGA4流入は0（全サイト流入は507セッション）。cta＝LP内「予約する」等hacomono遷移クリック（件数ベース／人数ではない）。<b>希望日リクエスト＝LPの希望日フォーム送信数（＝申込ベース。クリック数ではない）</b>で計測は5月開始のため3〜4月は「—」。</p>
   </div>
 
   <div class="card">
