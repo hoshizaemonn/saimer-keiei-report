@@ -44,6 +44,7 @@
   .beforecell{color:var(--before)} .aftercell{color:var(--after)}
   .note{font-size:12px;color:var(--ink2);background:#faf7f1;border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin-top:8px}
   .note b{color:var(--ink)}
+  .correction{font-size:12.5px;color:var(--ink);background:#fff4ec;border:1px solid #f0c9a8;border-left:4px solid var(--after);border-radius:10px;padding:12px 14px;margin:0 0 20px;line-height:1.7}
   .tbl-scroll{overflow-x:auto}
   .funnel{margin:10px 0 16px}
   .fstage{margin:2px 0}
@@ -65,8 +66,13 @@
 <body>
 <div class="wrap">
   <h1>S'aimer 運用前 × 運用後 比較（月別・図解）</h1>
-  <p class="sub">斗（広告・LP運用）関与開始＝<b>2026年2月</b>／運用前 2025年1月〜2026年1月・運用後 2026年2月〜7月<br>
-  出典：運用前=年間経営データ（hacomono純売上・プラン契約）／運用後=決済レポート＋hacomono明細。※基準差あり（末尾）。</p>
+  <p class="sub">斗（広告・LP運用）関与開始＝<b>2026年2月</b>／運用前 2025年1月〜2026年1月・運用後 2026年2月〜7月（休会のみ8月まで）<br>
+  出典：売上=決済レポート＋年間経営データ／<b>休会＝hacomono一次データ（実在籍）に差し替え済み</b>／有料・総＝決済明細ベース推計。※基準差あり（末尾）。</p>
+
+  <div class="correction">
+    <b>【正誤・2026/8/29 更新】休会数を hacomono 一次データに差し替えました。</b><br>
+    初版の休会「運用前1〜6名 → 運用後9〜10名へ倍増／12〜2月に急増」は<b>決済明細ベース集計</b>によるもので、hacomono実在籍とは<b>母集団が異なり不正確</b>でした（Cowork一次調査で判明）。実データでは、①運用前は<b>長期休眠を含め10〜14名</b>が休会在籍 → ②<b>2026年1月6日に長期放置の10名を一括退会整理</b>して4名へ急減 → ③<b>2026年6月以降に4→6→8名と“本物の”増加</b>（同時期に一部スタッフが退職・体制が変化）。<b>「課題は集客でなく定着」という結論は不変（むしろ増加時期がスタッフ体制と結びつき明確化）。</b>
+  </div>
 
   <div class="legend">
     <span class="lg"><span class="sw" style="background:var(--before)"></span>運用前（〜2026/1）</span>
@@ -77,8 +83,8 @@
   <div class="kpis">
     <div class="kpi"><div class="l">月平均売上（運用前）</div><div class="v up">¥565,300</div><div class="d">13ヶ月平均</div></div>
     <div class="kpi"><div class="l">月平均売上（運用後）</div><div class="v down">¥456,780</div><div class="d">6ヶ月平均</div></div>
-    <div class="kpi"><div class="l">有料会員（直近1月→7月）</div><div class="v">21 → 18</div><div class="d down">−3名</div></div>
-    <div class="kpi"><div class="l">休会（直近1月→7月）</div><div class="v">6 → 10</div><div class="d down">+4名（ほぼ倍）</div></div>
+    <div class="kpi"><div class="l">有料会員（直近1月→7月）</div><div class="v">21 → 18</div><div class="d down">−3名<span style="color:var(--muted)">※明細推計</span></div></div>
+    <div class="kpi"><div class="l">休会（hacomono実在籍 6月→8月）</div><div class="v">4 → 8</div><div class="d down">2ヶ月で倍増（本物の増加）</div></div>
   </div>
 
   <div class="card">
@@ -94,14 +100,14 @@
   </div>
 
   <div class="card">
-    <h2>②' 月別 総会員数（有料＋休会＋チケット）</h2>
-    <p class="cap">在籍全体の推移。運用前は23→42へ増加。運用後は53→42（7月にチケット層が減少）。※チケットの集計基準が運用前(プラン契約)と運用後(課金明細)で異なるため、2月→3月の段差は一部が方式差。</p>
+    <h2>②' 月別 総会員数（有料＋休会＋チケット・決済明細ベース推計）</h2>
+    <p class="cap">⚠️<b>この総数は決済明細ベースの推計</b>で、休会・チケットは hacomono実在籍と母集団が異なる（休会の正はチャート③）。傾向把握用。運用前23→42、運用後53→42（7月チケット層減）。<b>hacomono一次データでの取り直しを予定</b>。</p>
     <svg id="c_total" viewBox="0 0 920 220" role="img" aria-label="月別総会員数の推移"></svg>
   </div>
 
   <div class="card">
-    <h2>③ 月別 休会数（＝流出のサイン）</h2>
-    <p class="cap">運用前は1〜6名。運用後は9〜10名へ倍増。<b>売上減の主因はここ（既存の継続＝出口）</b>。新規入会は運用後も毎月1〜3名続いている。</p>
+    <h2>③ 月別 休会数（hacomono一次データ・実在籍）</h2>
+    <p class="cap"><b>出典＝hacomono実在籍（一次データ）。</b>2025年の10〜14名は2023〜24年からの<b>長期休眠を含む</b>数字で、<b>2026/1/6に休眠10名を一括退会整理</b>し4名へ急減。<b>本物の増加は2026年6月以降（4→6→7月／8月8名）</b>で、同時期のスタッフ体制の変化と時期が一致。売上減の主因は「定着（出口）」で不変。</p>
     <svg id="c_kyukai" viewBox="0 0 920 220" role="img" aria-label="月別休会数の推移"></svg>
   </div>
 
@@ -148,35 +154,37 @@
   <div class="note">
     <b>数字を扱う上での注意（要開示）</b><br>
     1. 売上：運用前=年間経営データ（hacomono中心の純売上・返金差引）／運用後=決済レポート（hacomono＋Pay.jp＋Square）。近いが完全同一基準ではない（直近は1月¥493k→2月¥531kと連続）。<br>
-    2. 会員数：運用前=プラン契約のstart/end日ベース（セミP0003含む）／運用後=計上月の課金明細ベース（セミ無し）。基準差で±数名。2026/2は欠測。<br>
+    2. 会員数：<b>休会＝hacomono一次データ（実在籍）に差し替え済み（チャート③が正）</b>。有料・総＝決済明細ベースの推計（母集団が異なり±数名〜のズレ。今後hacomono一次データで取り直す）。<br>
     3. 経費（家賃・人件費・広告費・リジョブ）は未取得＝損益（黒字/赤字）はこの資料では判定不可。<br>
     4. 3月決済シートに手数料の式ミス疑い（原本要確認）。売上額には影響なし。<br>
     5. 流入はGA4実測（LP /lp2/）。cta_click＝hacomono遷移クリック（件数）。希望日リクエスト計測は5月開始。<br>
-    <b>結論：課題は「集客」ではなく「転換・定着」。流入は運用で約3.7倍に伸長し入口は機能している（GA4実測）。売上を戻す最短手は①休会10名の掘り起こし（3〜4名復帰で+¥75,000〜100,000/月）、②hacomonoクリック414件→入会10件の転換改善（体験予約導線）。</b>
+    <b>結論：課題は「集客」ではなく「転換・定着」。流入は運用で約3.7倍に伸長し入口は機能している（GA4実測）。売上を戻す最短手は①現・休会8名の掘り起こし（3〜4名の復帰で+¥75,000〜100,000/月。復帰見込みの高い層を優先）、②hacomonoクリック414件→入会10件の転換改善（体験予約導線）。加えて6月以降の休会増は店舗体制の変化と時期が一致しており、要因確認を進める。</b>
   </div>
 </div>
 
 <script>
+// k（休会）＝hacomono一次データ（実在籍）。売上s・有料p・総tは決済明細ベースの推計（母集団が異なる／末尾注記）。
 const DATA = [
-  {m:"25/1",  s:671750, p:16, k:1,  t:23, n:""},
-  {m:"25/2",  s:661500, p:17, k:1,  t:24, n:""},
-  {m:"25/3",  s:616900, p:20, k:0,  t:27, n:""},
-  {m:"25/4",  s:452250, p:17, k:2,  t:28, n:""},
-  {m:"25/5",  s:585500, p:19, k:1,  t:31, n:""},
-  {m:"25/6",  s:548000, p:21, k:1,  t:34, n:""},
-  {m:"25/7",  s:657000, p:20, k:2,  t:35, n:""},
-  {m:"25/8",  s:466000, p:21, k:3,  t:37, n:""},
-  {m:"25/9",  s:734000, p:22, k:2,  t:38, n:""},
-  {m:"25/10", s:632000, p:24, k:1,  t:39, n:""},
-  {m:"25/11", s:613000, p:24, k:3,  t:41, n:""},
-  {m:"25/12", s:218000, p:21, k:5,  t:41, n:""},
-  {m:"26/1",  s:493000, p:21, k:6,  t:42, n:""},
-  {m:"26/2",  s:530888, p:20, k:9,  t:53, n:"", after:true},
-  {m:"26/3",  s:493646, p:20, k:9,  t:53, n:"1", after:true},
-  {m:"26/4",  s:492735, p:21, k:10, t:55, n:"3", after:true},
-  {m:"26/5",  s:383348, p:23, k:9,  t:56, n:"3", after:true},
-  {m:"26/6",  s:466250, p:19, k:10, t:53, n:"1", after:true},
-  {m:"26/7",  s:373810, p:18, k:10, t:42, n:"2", after:true},
+  {m:"25/1",  s:671750, p:16, k:10, t:23, n:""},
+  {m:"25/2",  s:661500, p:17, k:10, t:24, n:""},
+  {m:"25/3",  s:616900, p:20, k:10, t:27, n:""},
+  {m:"25/4",  s:452250, p:17, k:10, t:28, n:""},
+  {m:"25/5",  s:585500, p:19, k:10, t:31, n:""},
+  {m:"25/6",  s:548000, p:21, k:10, t:34, n:""},
+  {m:"25/7",  s:657000, p:20, k:11, t:35, n:""},
+  {m:"25/8",  s:466000, p:21, k:11, t:37, n:""},
+  {m:"25/9",  s:734000, p:22, k:10, t:38, n:""},
+  {m:"25/10", s:632000, p:24, k:10, t:39, n:""},
+  {m:"25/11", s:613000, p:24, k:12, t:41, n:""},
+  {m:"25/12", s:218000, p:21, k:14, t:41, n:""},
+  {m:"26/1",  s:493000, p:21, k:4,  t:42, n:""},
+  {m:"26/2",  s:530888, p:20, k:4,  t:53, n:"", after:true},
+  {m:"26/3",  s:493646, p:20, k:4,  t:53, n:"1", after:true},
+  {m:"26/4",  s:492735, p:21, k:4,  t:55, n:"3", after:true},
+  {m:"26/5",  s:383348, p:23, k:4,  t:56, n:"3", after:true},
+  {m:"26/6",  s:466250, p:19, k:4,  t:53, n:"1", after:true},
+  {m:"26/7",  s:373810, p:18, k:6,  t:42, n:"2", after:true},
+  {m:"26/8",  s:null,   p:null, k:8, t:null, n:"", after:true},
 ];
 const AFTER_START = 13; // index of 26/2
 const BEFORE="#2C7FB8", AFTER="#D95F0E";
@@ -241,7 +249,8 @@ document.getElementById("ftbody").innerHTML = frows;
 // table
 document.getElementById("tbody").innerHTML = DATA.map(d=>{
   const cls=d.after?"aftercell":"beforecell";
-  return `<tr><td class="${cls}">${d.m}</td><td>${yen(d.s)}</td><td>${d.p??"—"}</td><td>${d.k??"—"}</td><td>${d.t??"—"}</td><td>${d.n||"—"}</td></tr>`;
+  const sc = d.s==null?"—":yen(d.s);
+  return `<tr><td class="${cls}">${d.m}</td><td>${sc}</td><td>${d.p??"—"}</td><td>${d.k??"—"}</td><td>${d.t??"—"}</td><td>${d.n||"—"}</td></tr>`;
 }).join("");
 </script>
 </body>
